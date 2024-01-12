@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AlumnoController; //importar el controlador
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
+}); */
+
+/*  Route::get('/', function () {
+    return view('alumno.index');
 });
+
+Route::get('alumno', function () {
+     return view('alumno.index');
+ }); */
+ 
+//acceder mediante clases de controlador
+Route::resource('alumno', AlumnoController::class);
