@@ -54,17 +54,27 @@ class AlumnoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Alumno $alumno)
+    public function edit($id)
     {
         //
+        $alumno = Alumno::findOrFail($id);
+
+        return view('alumno.edit', compact('alumno'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Alumno $alumno)
+    public function update(Request $request,$id)
     {
         //
+        $datosAlumno = request()->except(['_token','_method']);
+        Alumno::where('id','=',$id)->update($datosAlumno);
+        
+        $alumno = Alumno::findOrFail($id);
+        return view('alumno.edit', compact('alumno'));  
+
+
     }
 
     /**

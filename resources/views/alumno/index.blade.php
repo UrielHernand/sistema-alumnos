@@ -18,12 +18,19 @@ Mostrar lista de Alumnos.
         @foreach ($alumnos as $alumno)
         <tr>
             <td>{{$alumno->id}}</td>
-            <td>{{$alumno->foto}}</td>
+            <td>
+                <img src="{{asset('storage').'/'.$alumno->foto}}" alt="">
+            
+            </td>
             <td>{{$alumno->nombre}}</td>
             <td>{{$alumno->apellidoPaterno}}</td>
             <td>{{$alumno->apellidoMaterno}}</td>
             <td>{{$alumno->correo}}</td>
-            <td>Editar |
+            <td>
+                <a href="{{url('/alumno/'.$alumno->id.'/edit')}}">Editar</a>
+
+                
+                |
 
                 
                 <form action="{{url('/alumno/' .$alumno->id)}}" method="POST">
