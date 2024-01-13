@@ -1,5 +1,19 @@
 
-Mostrar lista de Alumnos.
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+@if(Session::has('mensaje'))
+<div class="alert alert-success alert-dismissible "   role="alert">
+    <strong>{{Session::get('mensaje')}}</strong>
+</div>
+
+@endif
+ <button type=="button" class="close" data-dismiss="alert" aria-label="Close">
+     <span aria-hidden="true">&times;</span>
+</button>
+<a href="{{url('alumno/create')}}">Agregar Alumno</a>
     
 <table>
     <thead>
@@ -19,7 +33,7 @@ Mostrar lista de Alumnos.
         <tr>
             <td>{{$alumno->id}}</td>
             <td>
-                <img src="{{asset('storage').'/'.$alumno->foto}}" alt="">
+                <img src="{{asset('storage').'/'.$alumno->foto}}" alt="" width="100">
             
             </td>
             <td>{{$alumno->nombre}}</td>
@@ -45,5 +59,8 @@ Mostrar lista de Alumnos.
         @endforeach
     </tbody>
 </table>
+{!!$alumnos->links()!!}
 
+</div>
+@endsection
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alumno;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage; //para poder borrar la foto
 
 class AlumnoController extends Controller
 {
@@ -33,6 +34,21 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
+        $campos=[
+            'nombre'=>'required|string|max:100',
+            'apellidoPaterno'=>'required|string|max:100',
+            'apellidoMaterno'=>'required|string|max:100',
+            'correo'=>'required|email',
+            'foto'=>'required|max:10000|mimes:jpeg,png,jpg',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'foto.required'=>'La foto es requwerida'
+        ];
+
+        $this->validate($request,$campos,$mensaje);
+
         //recobir datos del alumno
         $datosAlumno = request()->except('_token');
         if($request->hasFile('foto')){
@@ -40,7 +56,8 @@ class AlumnoController extends Controller
         }
         Alumno::insert($datosAlumno);
 
-        return response()->json($datosAlumno);
+        /* return response()->json($datosAlumno); */
+        return redirect('alumno')->with('mensaje','Alumno agregado con éxito');
     }
 
     /**
@@ -68,12 +85,46 @@ class AlumnoController extends Controller
     public function update(Request $request,$id)
     {
         //
+        $campos=[
+            'nombre'=>'required|string|max:100',
+            'apellidoPaterno'=>'required|string|max:100',
+            'apellidoMaterno'=>'required|string|max:100',
+            'correo'=>'required|email',
+  
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'foto.required'=>'La foto es requwerida'
+           
+        ];
+        
+        if($request->hasFile('foto')){
+            $campos=['foto'=>'required|max:10000|mimes:jpeg,png,jpg'];
+
+            $mensaje=[
+                'foto.required'=>'La foto es requerida'
+            ];
+
+         
+        };
+
+        $this->validate($request,$campos,$mensaje);
+
+
         $datosAlumno = request()->except(['_token','_method']);
+        if($request->hasFile('foto')){
+            $alumno = Alumno::findOrFail($id);
+            Storage::delete('public/' .$alumno->foto);
+            $datosAlumno['foto']=$request->file('foto')->store('uploads','public');
+        }
+
         Alumno::where('id','=',$id)->update($datosAlumno);
         
         $alumno = Alumno::findOrFail($id);
-        return view('alumno.edit', compact('alumno'));  
 
+       /*  return view('alumno.edit', compact('alumno'));   */
+        return redirect('alumno')->with('Alumno editado con éxito');
 
     }
 
@@ -83,7 +134,12 @@ class AlumnoController extends Controller
     public function destroy($id)
     {
         //
-        Alumno::destroy($id);
-        return redirect('alumno');
+        $alumno = Alumno::findOrFail($id);
+        if(Storage::delete('public/' .$alumno->foto)){
+            Alumno::destroy($id);
+
+        }
+  
+        return redirect('alumno')->with('  ','Alumno borrado con éxito');
     }
 }

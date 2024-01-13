@@ -13,9 +13,9 @@ use App\Http\Controllers\AlumnoController; //importar el controlador
 |
 */
 
-/* Route::get('/', function () {
-    return view('welcome');
-}); */
+Route::get('/', function () {
+    return view('auth.login');
+}); 
 
 /*  Route::get('/', function () {
     return view('alumno.index');
@@ -26,4 +26,14 @@ Route::get('alumno', function () {
  }); */
  
 //acceder mediante clases de controlador
-Route::resource('alumno', AlumnoController::class);
+Route::resource('alumno', AlumnoController::class)->middleware('auth');
+
+Auth::routes(['register'=>false, 'reset'=>false]);
+
+Route::get('/home', [AlumnoController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/', [AlumnoController::class, 'index'])->name('home');
+    
+} );
