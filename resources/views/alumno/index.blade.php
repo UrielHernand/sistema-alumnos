@@ -6,13 +6,14 @@
 
 
 
-@if(Session::has('mensaje'))
-<div class="alert alert-success alert-dismissible "   role="alert">
-    <strong>{{Session::get('mensaje')}}</strong>
-    <button type ="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-   </button>
-</div>
+    @if(Session::has('mensaje'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <strong>{{ Session::get('mensaje') }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
 
 
 @endif
@@ -22,7 +23,7 @@
 <hr>
 
   <h2 class="fw-bolder">Lista de alumnos</h2>
-<table class="table">
+<table class="table" >
     <caption>Lista de alumnos</caption>
     <thead class="table-light">
         <tr >
@@ -50,18 +51,22 @@
             <td>{{$alumno->apellidoMaterno}}</td>
             <td>{{$alumno->correo}}</td>
             <td>
-                <a href="{{url('/alumno/'.$alumno->id.'/edit')}}">Editar</a>
-
-                
-                |
-
-                
-                <form action="{{url('/alumno/' .$alumno->id)}}" method="POST">
-                    @csrf
-                    {{method_field('DELETE')}}
-                    <input type="submit" onclick="return confirm('¿Desea eliminar el registro?')" value="Borrar">
-                
-                </form>
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example" style="margin: 2px">
+                    <button type="button" class="btn btn-warning">
+                        <a style="text-decoration:none" href="{{url('/alumno/'.$alumno->id.'/edit')}}" class="text-light">
+                            Editar 
+                        </a>
+                    </button>
+                   
+                    <form action="{{url('/alumno/' .$alumno->id)}}" method="POST">
+                        @csrf
+                        {{method_field('DELETE')}}
+                        <button type="submit" onclick="return confirm('¿Borrar?');" class="btn btn-danger">
+                            Borrar    
+                            
+                        </button>
+                    </form>
+                </div>
             </td>
         </tr>
             
