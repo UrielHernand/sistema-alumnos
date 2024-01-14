@@ -95,7 +95,7 @@ class AlumnoController extends Controller
 
         $mensaje=[
             'required'=>'El :attribute es requerido',
-            'foto.required'=>'La foto es requwerida'
+            'foto.required'=>'La foto es requerida'
            
         ];
         
@@ -124,7 +124,7 @@ class AlumnoController extends Controller
         $alumno = Alumno::findOrFail($id);
 
        /*  return view('alumno.edit', compact('alumno'));   */
-        return redirect('alumno')->with('Alumno editado con éxito');
+        return redirect('alumno')->with('mensaje','Alumno editado con éxito');
 
     }
 

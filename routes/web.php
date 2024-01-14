@@ -28,7 +28,7 @@ Route::get('alumno', function () {
 //acceder mediante clases de controlador
 Route::resource('alumno', AlumnoController::class)->middleware('auth');
 
-Auth::routes(['register'=>false, 'reset'=>false]);
+Auth::routes([ 'reset'=>false]);
 
 Route::get('/home', [AlumnoController::class, 'index'])->name('home');
 

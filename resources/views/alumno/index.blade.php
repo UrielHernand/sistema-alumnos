@@ -7,26 +7,29 @@
 
 
     @if(Session::has('mensaje'))
-    <div class="alert alert-success alert-dismissible" role="alert">
+    <div class="alert alert-success alert-dismissible" role="alert" id="alertIndex">
         <strong>{{ Session::get('mensaje') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+       
     </div>
-
-
-
-@endif
+     <script>
+        setTimeout(function () {
+           var  $alerta =  document.getElementById('alertIndex');
+          
+               $alerta.style.display = 'none';
+          
+        }, 2000);
+    </script>
+    @endif
 
 
 <button type="button" class="btn btn-primary"><a style="text-decoration:none"  href="{{url('alumno/create')}}" class="text-light">Agregar Alumno</a></button>
 <hr>
 
   <h2 class="fw-bolder">Lista de alumnos</h2>
-<table class="table" >
+<table class="table " >
     <caption>Lista de alumnos</caption>
-    <thead class="table-light">
-        <tr >
+    <thead class="table-light ">
+        <tr class=" bg-success text-white">
             <th scope="col">Id</th>
             <th scope="col">Foto</th> 
             <th scope="col">Nombre</th>
