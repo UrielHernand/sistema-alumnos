@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlumnoController; //importar el controlador
+use App\Http\controllers\MaestroController;
+use App\Http\controllers\HomeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,11 +15,9 @@ use App\Http\Controllers\AlumnoController; //importar el controlador
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     return view('auth.login');
 }); 
-
 /*  Route::get('/', function () {
     return view('alumno.index');
 });
@@ -30,10 +31,13 @@ Route::resource('alumno', AlumnoController::class)->middleware('auth');
 
 Auth::routes([ 'reset'=>false]);
 
-Route::get('/home', [AlumnoController::class, 'index'])->name('home');
+
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', [AlumnoController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::get('/alumno', [AlumnoController::class, 'index'])->name('home');
     
+    Route::get('/maestro', [MaestroController::class, 'index'])->name('home');  
 } );

@@ -2,18 +2,12 @@
 
 @section('content')
 <div class="container-lg">
-
-
-
+    
 <div class="row">
     <div class="col-md-6">
         <form action="{{url('/alumno')}}" method="post" enctype="multipart/form-data" class="text-black ">
             @csrf
             @include('alumno.form',['modo'=>'Crear'])
-            
-            
-        
-        
         </form>
     </div>
 
