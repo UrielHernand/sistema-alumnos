@@ -4,8 +4,7 @@
 @section('content')
 <div class="container">
 
-
-
+    <button type="button" class="btn btn-primary"><a style="text-decoration:none"  href="{{url('/')}}" class="text-light">Regresar</a></button>
     @if(Session::has('mensaje'))
     <div class="alert alert-success alert-dismissible" role="alert" id="alertIndex">
         <strong>{{ Session::get('mensaje') }}</strong>
@@ -36,7 +35,6 @@
             <th scope="col">Apellido Materno</th>
             <th scope="col">Apellido Paterno</th>
             <th scope="col">Correo</th>
-            
             <th>Acciones</th>
         </tr>
     </thead>
@@ -77,7 +75,6 @@
     </tbody>
 </table>
 {!!$alumnos->links()!!}
-
 </div>
 @endsection
 
