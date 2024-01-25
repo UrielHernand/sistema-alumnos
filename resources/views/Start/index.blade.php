@@ -5,11 +5,10 @@
     {{ auth()->user()->name }}
     
   </h1>
-  <h1 class="display-10">
-    {{$start }}
-  </h1>
+
     
     <div class="card mb-3" style="max-width: 840px;">
+      <p class="lead text-center text-primary ">Servicios Escolares</p>
         <div class="row g-0">
           <div class="col-md-5">
             <img src="{{asset('storage').'/'. 'uploads/k6zCfkfzpxaF4RMsMCf8uX22cj1AHtLeXddVmHEg.png'}}" class="img-fluid rounded-start" alt="...">
@@ -44,8 +43,10 @@
         </div>
 
       </div>
+      @foreach ($Empleados as $maestro)
+    {{--   <li>{{ $maestro->nombre }}</li> --}}
+      @endforeach
 
-   
 
 
 
