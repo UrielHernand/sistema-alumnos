@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlumnoController; //importar el controlador
 use App\Http\controllers\MaestroController;
 use App\Http\controllers\StartController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +35,17 @@ Auth::routes([ 'reset'=>false]);
 
 
 
+
+
+
+
+
+
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('/home', [StartController::class, 'index'])->name('home');
     Route::get('/', [StartController::class, 'index'])->name('home');
-
-    Route::get('/alumno', [AlumnoController::class, 'index'])->name('home');
+    Route::get('/alumno', [AlumnoController::class, 'index'])->name('alumno.home');
+    Route::get('/maestro', [MaestroController::class, 'index'])->name('maestro.home');  
     
-    Route::get('/maestro', [MaestroController::class, 'index'])->name('home');  
 } );

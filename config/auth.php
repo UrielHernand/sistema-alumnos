@@ -1,5 +1,7 @@
 <?php
 
+
+
 return [
 
     /*
@@ -38,9 +40,18 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'ldap',
         ],
+        'ldap' => [
+            'driver' => 'ldap',
+            'model' => \App\Ldap\User::class,
+        ],
+        /* 'ldap' => [
+            'driver' => 'ldap',
+            'provider' => 'ldap_users',
+        ], */
     ],
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -60,15 +71,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        /* 'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-        ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        ], */
+        'ldap' => [
+            'driver' => 'ldap',
+            'model' => LdapRecord\Models\OpenLDAP\User::class,
+            
+        ]
     ],
 
     /*

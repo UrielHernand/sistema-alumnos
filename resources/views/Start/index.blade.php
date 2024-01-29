@@ -43,9 +43,7 @@
         </div>
 
       </div>
-      @foreach ($Empleados as $maestro)
-    {{--   <li>{{ $maestro->nombre }}</li> --}}
-      @endforeach
+    
 
 
 
