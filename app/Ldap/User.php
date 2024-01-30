@@ -69,5 +69,6 @@ class User extends LdapModel implements Authenticatable
     public function getDnAttribute(): string
     {
         return $this->getAttribute($this->getDnAttributeName());
+        
     }
 }

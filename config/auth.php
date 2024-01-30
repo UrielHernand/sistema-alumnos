@@ -38,8 +38,10 @@ return [
     */
 
     'guards' => [
+        //Se está utilizando el controlador de sesión ('session') para manejar la autenticación web.
         'web' => [
             'driver' => 'session',
+            //l proveedor ('provider') está configurado como 'ldap
             'provider' => 'ldap',
         ],
         'ldap' => [
