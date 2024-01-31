@@ -6,14 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
-
-
 use Laravel\Sanctum\HasApiTokens;
-
 ///importar LdapAuthenticable de versión "^3.1" de directorytree/ldaprecord-laravel 
-
-
 use LdapRecord\Laravel\Auth\AuthenticatesWithLdap;
 
 class User extends Authenticatable 

@@ -14,5 +14,6 @@ class Accounting implements Scope
     public function apply(Builder $query, Model $model): void
     {
         // ...
+        
     }
 }
